@@ -6,6 +6,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import jdbc.controller.ReservasController;
+import jdbc.modelo.Reserva;
+
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -38,6 +42,10 @@ public class Busqueda extends JFrame {
 	private JLabel labelAtras;
 	private JLabel labelExit;
 	int xMouse, yMouse;
+	String reserva;
+	String huespedes;
+	
+	private ReservasController reservaController;
 
 	/**
 	 * Launch the application.
@@ -59,6 +67,7 @@ public class Busqueda extends JFrame {
 	 * Create the frame.
 	 */
 	public Busqueda() {
+		this.reservaController = new ReservasController();
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Busqueda.class.getResource("/imagenes/lupa2.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 910, 571);
@@ -101,6 +110,8 @@ public class Busqueda extends JFrame {
 		modelo.addColumn("Fecha Check Out");
 		modelo.addColumn("Valor");
 		modelo.addColumn("Forma de Pago");
+		tbReservas.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		
 		JScrollPane scroll_table = new JScrollPane(tbReservas);
 		panel.addTab("Reservas", new ImageIcon(Busqueda.class.getResource("/imagenes/reservado.png")), scroll_table, null);
 		scroll_table.setVisible(true);
@@ -216,7 +227,7 @@ public class Busqueda extends JFrame {
 		btnbuscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
+				LlenarTablaReservas();
 			}
 		});
 		btnbuscar.setLayout(null);
@@ -224,6 +235,7 @@ public class Busqueda extends JFrame {
 		btnbuscar.setBounds(748, 125, 122, 35);
 		btnbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 		contentPane.add(btnbuscar);
+		//btnbuscar.add(lblBuscar);
 		
 		JLabel lblBuscar = new JLabel("BUSCAR");
 		lblBuscar.setBounds(0, 0, 122, 35);
@@ -260,6 +272,23 @@ public class Busqueda extends JFrame {
 		lblEliminar.setBounds(0, 0, 122, 35);
 		btnEliminar.add(lblEliminar);
 		setResizable(false);
+	}
+	
+	private List<Reserva> buscarReservas() {
+		return this.reservaController.buscar();
+	}
+	
+	private void LlenarTablaReservas() {
+		// Llenar tabla
+				List<Reserva> reserva = buscarReservas();
+				try {
+					for (Reserva reservas : reserva) {
+						modelo.addRow(new Object[] { reservas.getId(), reservas.getfechaE(), 
+						reservas.getfechaS(), reservas.getvalor(), reservas.getformaPago() });
+					}
+				} catch (Exception e) {
+					throw e;
+				}
 	}
 	
 //Código que permite mover la ventana por la pantalla según la posición de "x" y "y"
