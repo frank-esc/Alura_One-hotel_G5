@@ -253,7 +253,6 @@ public class Busqueda extends JFrame {
 		btnbuscar.setBounds(748, 125, 122, 35);
 		btnbuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 		contentPane.add(btnbuscar);
-		//btnbuscar.add(lblBuscar);
 		
 		JLabel lblBuscar = new JLabel("BUSCAR");
 		lblBuscar.setBounds(0, 0, 122, 35);
@@ -299,6 +298,7 @@ public class Busqueda extends JFrame {
 		
 		JPanel btnEliminar = new JPanel();
 		btnEliminar.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseClicked(MouseEvent e) {
 				int filaReservas = tbReservas.getSelectedRow();
 				int filaHuespedes = tbHuespedes.getSelectedRow();
