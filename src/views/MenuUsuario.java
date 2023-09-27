@@ -107,6 +107,7 @@ public class MenuUsuario extends JFrame {
 		btnRegistro.setBackground(new Color(12, 138, 199));
 		panelMenu.add(btnRegistro);
 		btnRegistro.setLayout(null);
+		btnRegistro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 		
 		labelRegistro = new JLabel("Registro de reservas");
 		labelRegistro.setIcon(new ImageIcon(MenuUsuario.class.getResource("/imagenes/reservado.png")));
@@ -137,6 +138,7 @@ public class MenuUsuario extends JFrame {
 		btnBusqueda.setBackground(new Color(12, 138, 199));
 		panelMenu.add(btnBusqueda);
 		btnBusqueda.setLayout(null);
+		btnBusqueda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 		
 		JLabel lblBusquedaDeReservas = new JLabel("Búsqueda");
 		lblBusquedaDeReservas.setIcon(new ImageIcon(MenuUsuario.class.getResource("/imagenes/pessoas.png")));

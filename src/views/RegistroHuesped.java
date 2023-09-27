@@ -10,6 +10,7 @@ import com.toedter.calendar.JDateChooser;
 
 import jdbc.controller.HuespedesController;
 import jdbc.controller.ReservasController;
+import jdbc.modelo.Huespedes;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -266,6 +267,7 @@ public class RegistroHuesped extends JFrame {
 		btnguardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				guardarHuesped();
 			}
 		});
 		btnguardar.setLayout(null);
@@ -327,6 +329,21 @@ public class RegistroHuesped extends JFrame {
 		labelExit.setForeground(SystemColor.black);
 		labelExit.setFont(new Font("Roboto", Font.PLAIN, 18));
 	}
+	
+	private void guardarHuesped() {
+		
+		if (txtFechaN.getDate() != null && !txtNombre.equals("") && !txtApellido.equals("") && !txtTelefono.equals("")) {		
+			String fechaN = ((JTextField)txtFechaN.getDateEditor().getUiComponent()).getText();	
+			int nreserva = Integer.parseInt(txtNreserva.getText());
+			Huespedes huespedes = new Huespedes(txtNombre.getText(), txtApellido.getText(),  java.sql.Date.valueOf(fechaN), txtNacionalidad.getSelectedItem().toString(),txtTelefono.getText(), nreserva);
+			this.huespedesController.guardar(huespedes);
+			Exito exito = new Exito();
+			exito.setVisible(true);	
+			dispose();
+		} else {
+			JOptionPane.showMessageDialog(this, "Debes llenar todos los campos.");
+		}									
+}
 	
 	
 	//Código que permite mover la ventana por la pantalla según la posición de "x" y "y"	

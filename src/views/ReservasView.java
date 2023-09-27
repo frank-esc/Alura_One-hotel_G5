@@ -325,6 +325,7 @@ public class ReservasView extends JFrame {
 		btnsiguiente.setBounds(238, 493, 122, 35);
 		panel.add(btnsiguiente);
 		btnsiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+		btnsiguiente.add(lblSiguiente);	
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(109, 155, 10, 10);
